@@ -109,6 +109,9 @@ def main(input_filepath):
 
     # -------------- Save preprocessed train, valid and test sets -----------------
     processed_data_dir = os.path.join(base_dir, 'data/processed')
+    if(os.path.exists(processed_data_dir) == False):
+        os.makedirs(processed_data_dir)
+
     data_list = [X_train, y_train, X_valid, y_valid, X_test, y_test]
     data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
     for data_str, data in zip(data_str_list, data_list):
