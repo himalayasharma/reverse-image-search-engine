@@ -74,6 +74,8 @@ def main(base_dir):
 
     # Save history 
     model_path =  os.path.join(base_dir, 'models')
+    if(os.path.exists(model_path) == False):
+        os.makedirs(model_path)
     history_path = os.path.join(model_path, 'history')
 
     with open(history_path, 'wb') as file_pi:
@@ -81,8 +83,6 @@ def main(base_dir):
     logger.info('saved performance history')
 
     # Save model
-    if(os.path.exists(model_path) == False):
-        os.makedirs(model_path)
     model.save(model_path)
     logger.info(f'saved model history to {model_path}')
     
