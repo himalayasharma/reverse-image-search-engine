@@ -6,7 +6,6 @@ import os, wget, tarfile
 import numpy as np
 import pandas as pd
 import pickle
-import random
 import re
 import matplotlib.pyplot as plt
 import re
@@ -116,6 +115,7 @@ def main(input_filepath):
     data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
     for data_str, data in zip(data_str_list, data_list):
         np.save(os.path.join(processed_data_dir, data_str), data)
+    logger.info(f'saved train, validation and test data to {processed_data_dir}')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
