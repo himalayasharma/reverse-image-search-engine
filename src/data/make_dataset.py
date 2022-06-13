@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from tkinter import W
-import click
 import logging
 import os, wget, tarfile
 import numpy as np
@@ -54,16 +53,12 @@ def load_train_data(data_dir):
     train_labels = np.concatenate(temp_labels, axis=0)
     return train_data, train_labels
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-def main(input_filepath):
+def main(base_dir):
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
     """
     # -------------- Download and extract data -----------------
     logger = logging.getLogger(__name__)
-    # Specify root directory of project
-    base_dir = input_filepath
     # Specify path to which data that will be downloaded
     raw_data_dir = os.path.join(base_dir, 'data/raw')
     # Download raw data
@@ -128,4 +123,4 @@ if __name__ == '__main__':
     # load up the .env entries as environment variables
     load_dotenv(find_dotenv())
 
-    main()
+    main(project_dir )
