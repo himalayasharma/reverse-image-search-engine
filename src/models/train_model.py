@@ -1,5 +1,6 @@
 import os
 import logging
+from re import L
 import numpy as np
 import pickle
 from pathlib import Path
@@ -14,9 +15,9 @@ def build_model(logger, data_dict):
             weights='imagenet',
             input_tensor=None,
             input_shape=data_dict["X_train"][0].shape)
-
     logger.info('loaded pre-trained frozen VGG-16 model with imagenet weights')
 
+    # Add dense layers at the end of pre-trained model
     base_model.trainable = False
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.layers import Flatten, Dense
@@ -50,7 +51,8 @@ def main(base_dir):
     data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
     for data_str in (data_str_list):
         data_dict[data_str] = np.load(os.path.join(processed_data_dir, f"{data_str}.npy"))
-    logger.info('loaded train, valid and test data')
+    data_dict['meta'] = os.path.join(base_dir, 'data/raw')
+    logger.info('loaded train, valid, test and data')
     
     # Pre-process data
     from tensorflow.keras.applications.vgg16 import preprocess_input
@@ -85,7 +87,7 @@ def main(base_dir):
     # Save model
     model.save(model_path)
     logger.info(f'saved model history to {model_path}')
-    
+
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)
@@ -95,5 +97,4 @@ if __name__ == '__main__':
 
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
-
     main(project_dir)
