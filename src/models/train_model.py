@@ -52,7 +52,7 @@ def main(base_dir):
     data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
     for data_str in (data_str_list):
         data_dict[data_str] = np.load(os.path.join(processed_data_dir, f"{data_str}.npy"))
-    logger.info('loaded train, valid, test and data')
+    logger.info('loaded train, valid and test data')
     
     # Pre-process data
     from tensorflow.keras.applications.vgg16 import preprocess_input
