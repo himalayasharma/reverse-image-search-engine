@@ -51,7 +51,6 @@ def main(base_dir):
     data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
     for data_str in (data_str_list):
         data_dict[data_str] = np.load(os.path.join(processed_data_dir, f"{data_str}.npy"))
-    data_dict['meta'] = os.path.join(base_dir, 'data/raw')
     logger.info('loaded train, valid, test and data')
     
     # Pre-process data
