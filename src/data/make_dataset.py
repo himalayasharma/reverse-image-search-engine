@@ -18,9 +18,7 @@ def download_data(destination_dir, url="http://www.cs.toronto.edu/~kriz/cifar-10
         os.makedirs(destination_dir)
     # Download data if it does not exist on disk
     if(os.path.exists(os.path.join(destination_dir, "cifar-10-python.tar.gz")) == False):
-        print("\n")
         wget.download(url, destination_dir)
-        print("\n")
 
 def extract_data(data_dir, filename="cifar-10-python.tar.gz"):
 
@@ -52,6 +50,14 @@ def load_train_data(data_dir):
     train_data = np.concatenate(temp_data, axis=0)
     train_labels = np.concatenate(temp_labels, axis=0)
     return train_data, train_labels
+
+def get_str_labels(logger, data_dict, meta_data_dict):
+
+    mapping_labels = dict(zip(np.unique(data_dict['y_train']), meta_data_dict[b'label_names']))
+    convert_labels = lambda label:mapping_labels[label].decode('ascii')
+    all_y = np.concatenate([data_dict['y_train'], data_dict['y_valid'], data_dict['y_test']], axis=0)
+    all_y_str = np.array(list(map(convert_labels, all_y)))
+    return all_y_str
 
 def main(base_dir):
     """ Runs data processing scripts to turn raw data from (../raw) into
@@ -106,11 +112,19 @@ def main(base_dir):
     if(os.path.exists(processed_data_dir) == False):
         os.makedirs(processed_data_dir)
 
+    data_dict = dict()
     data_list = [X_train, y_train, X_valid, y_valid, X_test, y_test]
     data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
     for data_str, data in zip(data_str_list, data_list):
+        data_dict[data_str] = data
         np.save(os.path.join(processed_data_dir, data_str), data)
     logger.info(f'saved train, validation and test data to {processed_data_dir}')
+
+    # -------------- Get and save string labels for all images in dataset -----------------
+    all_str_labels = get_str_labels(logger, data_dict, meta_data_dict)
+    with open(os.path.join(processed_data_dir, 'all_str_labels'), 'wb') as file_pi:
+        pickle.dump(all_str_labels, file_pi)
+    logger.info('saved string labels for all images')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
