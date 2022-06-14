@@ -46,10 +46,10 @@ def main(base_dir):
     # Generate encodings
     all_encodings = generate_encodings(logger, intermediate_layer_model, data_dict)
     # Save encodings
-    prediction_path = os.path.join(model_path, 'predictions')
-    with open(prediction_path, 'wb') as file_pi:
+    encodings_path = os.path.join(model_path, 'encodings')
+    with open(encodings_path, 'wb') as file_pi:
         pickle.dump(all_encodings, file_pi)
-    logger.info(f'saved encodings to {prediction_path}')
+    logger.info(f'saved encodings to {encodings_path}')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
