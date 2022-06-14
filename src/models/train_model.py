@@ -4,6 +4,7 @@ from re import L
 import numpy as np
 import pickle
 from pathlib import Path
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def build_model(logger, data_dict):
 
@@ -61,17 +62,13 @@ def main(base_dir):
     data_dict['X_test'] = preprocess_input(data_dict['X_test'])
     
     # Build and compile model
-    print("=================================================================")
     model = build_model(logger, data_dict)
-    print("=================================================================")
 
     # Train model
     epochs = int(input("Enter no. of epochs:"))
     logger.info(f'training model for {epochs} epochs')
-    print("=================================================================")
     history = model.fit(data_dict['X_train'], data_dict['y_train'],\
         epochs=epochs, validation_data=(data_dict['X_valid'], data_dict['y_valid']), batch_size=32)
-    print("=================================================================")
 
     # Save history 
     model_path =  os.path.join(base_dir, 'models')
