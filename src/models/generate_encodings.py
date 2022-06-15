@@ -24,16 +24,32 @@ def generate_encodings(logger, model, data_dict):
     logger.info(f"generated encodings for all {len(all_X)} images in CIFAR-10 dataset")
     return all_encodings
 
+# Unpickle file
+def unpickle(file):
+
+    with open(file, 'rb') as fo:
+        dictionary = pickle.load(fo, encoding='bytes')
+    return dictionary
+
+def get_str_labels(logger, data_dict):
+
+    meta_data_dict = unpickle(os.path.join('data/raw/cifar-10-batches-py', 'batches.meta'))
+    mapping_labels = dict(zip(np.unique(data_dict['y_train']), meta_data_dict[b'label_names']))
+    convert_labels = lambda label:mapping_labels[label].decode('ascii')
+    all_y = np.concatenate([data_dict['y_train'], data_dict['y_valid'], data_dict['y_test']], axis=0)
+    all_y_str = np.array(list(map(convert_labels, all_y)))
+    return all_y_str
+    
 def main(base_dir):
 
     logger = logging.getLogger(__name__)
 
     # Load data
     processed_data_dir = os.path.join(base_dir, 'data/processed')
-    data_dict = dict()
-    data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
-    for data_str in (data_str_list):
-        data_dict[data_str] = np.load(os.path.join(processed_data_dir, f"{data_str}.npy"))
+    data_dict_path = os.path.join(processed_data_dir, 'data_dict')
+    with open(data_dict_path, 'rb') as file_pi:
+        data_dict = pickle.load(file_pi)
+    logger.info('loaded train, valid and test data')
 
     # Load trained model
     model_path = os.path.join(base_dir, 'models')
@@ -45,6 +61,7 @@ def main(base_dir):
 
     # Generate encodings
     all_encodings = generate_encodings(logger, intermediate_layer_model, data_dict)
+
     # Save encodings
     encodings_path = os.path.join(model_path, 'encodings')
     with open(encodings_path, 'wb') as file_pi:
