@@ -1,7 +1,5 @@
 import os
 import logging
-from re import L
-import numpy as np
 import pickle
 from pathlib import Path
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
