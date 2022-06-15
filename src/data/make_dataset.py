@@ -117,7 +117,8 @@ def main(base_dir):
     data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
     for data_str, data in zip(data_str_list, data_list):
         data_dict[data_str] = data
-        np.save(os.path.join(processed_data_dir, data_str), data)
+    with open(os.path.join(processed_data_dir, 'data_dict'), 'wb') as file_pi:
+        pickle.dump(data_dict, file_pi)
     logger.info(f'saved train, validation and test data to {processed_data_dir}')
 
     # -------------- Get and save string labels for all images in dataset -----------------
