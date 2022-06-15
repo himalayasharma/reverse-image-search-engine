@@ -48,10 +48,9 @@ def main(base_dir):
 
     # Load processed data
     processed_data_dir = os.path.join(base_dir, 'data/processed')
-    data_dict = dict()
-    data_str_list = ['X_train', 'y_train', 'X_valid', 'y_valid', 'X_test', 'y_test']
-    for data_str in (data_str_list):
-        data_dict[data_str] = np.load(os.path.join(processed_data_dir, f"{data_str}.npy"))
+    data_dict_path = os.path.join(processed_data_dir, 'data_dict')
+    with open(data_dict_path, 'rb') as file_pi:
+        data_dict = pickle.load(file_pi)
     logger.info('loaded train, valid and test data')
     
     # Pre-process data
