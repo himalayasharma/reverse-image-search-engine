@@ -8,13 +8,19 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from tensorflow.keras.applications.vgg16 import preprocess_input
 
 def preprocess_query_image(query_img_path):
 
     # Preprocess input image
     image = Image.open(query_img_path)
     image = image.resize((32, 32),Image.Resampling.LANCZOS)
-    return image
+    plt.imshow(image)
+    plt.show()
+    image_arr = np.array(image)
+    image_arr = np.expand_dims(image_arr, axis=0)
+    image_arr = preprocess_input(image_arr)
+    return image_arr
 
 def get_idx_of_matches(all_encodings, query_encoding, n_matches=5):
     
@@ -37,11 +43,7 @@ def main(base_dir):
     logger.info('query image successfully loaded')
 
     # Pre-process query image
-    query_img = preprocess_query_image(query_img_path)
-    plt.imshow(query_img)
-    plt.show()
-    query_img_arr = np.array(query_img)
-    query_img_arr = np.expand_dims(query_img_arr, axis=0)
+    query_img_arr = preprocess_query_image(query_img_path)
 
     # Load all encodings
     encodings_path = os.path.join(base_dir, 'models/encodings')
