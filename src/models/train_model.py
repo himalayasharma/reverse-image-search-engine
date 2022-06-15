@@ -2,12 +2,12 @@ import os
 import logging
 import pickle
 from pathlib import Path
+from tensorflow import keras
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def build_model(logger, data_dict):
 
     from tensorflow.keras.applications.vgg16 import VGG16
-
     # Load pre-trained model for transfer learning
     base_model = VGG16(
             include_top=False,
@@ -17,7 +17,7 @@ def build_model(logger, data_dict):
     logger.info('loaded pre-trained frozen VGG-16 model with imagenet weights')
 
     # Add dense layers at the end of pre-trained model
-    base_model.trainable = False
+    base_model.trainable = True
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.layers import Flatten, Dense
 
@@ -27,15 +27,15 @@ def build_model(logger, data_dict):
         Dense(units=512, activation='relu'),
         Dense(units=256, activation='relu'),
         Dense(units=128, activation='relu'),
-        Dense(units=10, activation='softmax')
+        Dense(units=10)
     ])
 
     logger.info('added 3 dense layers to make the network compatible for current use-case')
     print(model.summary())
 
     # Compile model
-    model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
+    model.compile(optimizer=keras.optimizers.Adam(1e-5),
+              loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics='accuracy')
 
     return model
@@ -57,7 +57,7 @@ def main(base_dir):
     data_dict['X_train'] = preprocess_input(data_dict['X_train'])
     data_dict['X_valid'] = preprocess_input(data_dict['X_valid'])
     data_dict['X_test'] = preprocess_input(data_dict['X_test'])
-    
+
     # Build and compile model
     model = build_model(logger, data_dict)
 
