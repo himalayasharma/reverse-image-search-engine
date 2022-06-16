@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-from tkinter import W
 import logging
 import os, wget, tarfile
 import numpy as np
 import pandas as pd
 import pickle
-import re
-import matplotlib.pyplot as plt
 import re
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
@@ -126,6 +123,15 @@ def main(base_dir):
     with open(os.path.join(processed_data_dir, 'all_str_labels'), 'wb') as file_pi:
         pickle.dump(all_str_labels, file_pi)
     logger.info('saved string labels for all images')
+
+    # -------------- Save all X & y -----------------
+    all_X = np.concatenate([X_train, X_valid, X_test], axis=0)
+    all_y = np.concatenate([y_train, y_valid, y_test], axis=0)
+    with open(os.path.join(processed_data_dir, 'all_X'), 'wb') as file_pi:
+        pickle.dump(all_X, file_pi)
+    with open(os.path.join(processed_data_dir, 'all_y'), 'wb') as file_pi:
+        pickle.dump(all_y, file_pi)
+    logger.info(f'saved combined data to {processed_data_dir}')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
