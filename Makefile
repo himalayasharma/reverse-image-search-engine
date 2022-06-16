@@ -76,11 +76,8 @@ else
 	conda create --name $(PROJECT_NAME) python=2.7
 endif
 else
-	$(PYTHON_INTERPRETER) -m pip install -q virtualenv virtualenvwrapper
-	@echo ">>> Installing virtualenvwrapper if not already installed.\nMake sure the following lines are in shell startup file\n\
-	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /home/$$USER/.local/bin/virtualenvwrapper.sh\n"
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+	$(PYTHON_INTERPRETER) -m venv $(PROJECT_NAME)
+	@echo ">>> New virtualenv created. Activate with:\nsource $(PROJECT_NAME)/bin/activate"
 endif
 
 ## Test python environment is setup correctly
@@ -90,8 +87,6 @@ test_environment:
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
-
-
 
 #################################################################################
 # Self Documenting Commands                                                     #
