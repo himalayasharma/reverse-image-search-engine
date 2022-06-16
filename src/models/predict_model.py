@@ -10,18 +10,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tensorflow.keras.applications.vgg16 import preprocess_input
 
+# Preprocess query image
 def preprocess_query_image(query_img_path):
 
-    # Preprocess input image
     image = Image.open(query_img_path)
     image = image.resize((32, 32),Image.Resampling.LANCZOS)
-    plt.imshow(image)
-    plt.show()
     image_arr = np.array(image)
     image_arr = np.expand_dims(image_arr, axis=0)
     image_arr = preprocess_input(image_arr)
-    return image_arr
+    return image, image_arr
 
+# Get indices of top 5 matching images
 def get_idx_of_matches(all_encodings, query_encoding, n_matches=5):
     
     encoding_diff = np.sum(np.abs(all_encodings - query_encoding), axis=1)
@@ -33,7 +32,7 @@ def main(base_dir):
 
     logger = logging.getLogger(__name__)
 
-    # Get query image path
+    # -------------- Get query image path -----------------
     print("NOTE: Put query image in 'query-images' directory of project")
     query_img_name = input("Enter query image name (with extension):")
     query_img_path = os.path.join(base_dir, f'query-images/{query_img_name}')
@@ -42,43 +41,53 @@ def main(base_dir):
         return -1
     logger.info('query image successfully loaded')
 
-    # Pre-process query image
-    query_img_arr = preprocess_query_image(query_img_path)
+    # -------------- Pre-process query image -----------------
+    query_image_rescaled, query_img_arr = preprocess_query_image(query_img_path)
 
-    # Load all encodings
+    # -------------- Load all encodings -----------------
     encodings_path = os.path.join(base_dir, 'models/encodings')
     with open(encodings_path, 'rb') as file_pi:
         all_encodings = pickle.load(file_pi)
     logger.info(f'loaded all image encodings')
     
-    # Load model
+    # -------------- Load model -----------------
     model_path = os.path.join(base_dir, 'models')
     model = keras.models.load_model(model_path) 
     logger.info(f'loaded model from {model_path}')
     intermediate_layer_model = build_intermediate_layer_model(logger, model)
 
-    # Create encoding for query image
+    # -------------- Create encoding for query image -----------------
     encoding_query_img = intermediate_layer_model.predict(query_img_arr)
 
-    # Get indices of matching images
+    # -------------- Get indices of matching images -----------------
     match_idx = get_idx_of_matches(all_encodings, encoding_query_img, n_matches=5)
 
-    # Load data
+    # -------------- Load data -----------------
     processed_data_dir = os.path.join(base_dir, 'data/processed')
     data_dict_path = os.path.join(processed_data_dir, 'data_dict')
     with open(data_dict_path, 'rb') as file_pi:
         data_dict = pickle.load(file_pi)
     all_X = np.concatenate([data_dict['X_train'], data_dict['X_valid'], data_dict['X_test']], axis=0)  
-    
-    # Plot matched images
-    ncols = 5
-    fig, ax = plt.subplots(1, ncols, figsize=(15, 8))
-    idx = 0
-    for col in range(ncols):
-        ax[col].axis("off")
-        #ax[col].set_title(f"Label:{all_y_str[match_idx[idx]]}", fontsize=12)
-        ax[col].imshow(all_X[match_idx[idx]])
-        idx += 1
+
+    # -------------- Show query image and top 5 matches -----------------
+    fig = plt.figure()
+    fig.set_figheight(6)
+    fig.set_figwidth(15)
+    ax = dict()
+    loc_list = [(0,2), (1,0), (1,1), (1,2), (1,3), (1,4)]
+    for i, loc in enumerate(loc_list):
+        if(i == 0):
+            ax[i] = plt.subplot2grid(shape=(2,5), loc=loc, colspan=1)
+            ax[i].imshow(query_image_rescaled)
+            ax[i].axis('off')
+            ax[i].set_title('Rescaled Query Image')
+            idx = 0
+        else:
+            ax[i] = plt.subplot2grid(shape=(2,5), loc=loc, colspan=1)
+            ax[i].axis("off")
+            ax[i].set_title(f'Match {idx+1}')
+            ax[i].imshow(all_X[match_idx[idx]])
+            idx += 1
     plt.show()
 
 if __name__ == '__main__':
