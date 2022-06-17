@@ -19,10 +19,12 @@ Project Organization
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── README.md          <- The top-level README for developers using this project
+    ├── query-images       <- Contains query images against which to find matches
+    ├── readme-assets      <- Contains images to be used in README.md
     ├── data
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    │   ├── processed      <- The final, canonical data sets for modeling
+    │   └── raw            <- The original, immutable data dump
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
@@ -31,7 +33,7 @@ Project Organization
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
-    └── src                <- Source code for use in this project.
+    └── src                <- Source code for use in this project
         ├── __init__.py    <- Makes src a Python module
         │
         ├── data           <- Scripts to download or generate data
