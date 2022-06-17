@@ -10,7 +10,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tensorflow.keras.applications.vgg16 import preprocess_input
 
-# Preprocess query image
 def preprocess_query_image(query_img_path):
 
     image = Image.open(query_img_path)
@@ -20,7 +19,6 @@ def preprocess_query_image(query_img_path):
     image_arr = preprocess_input(image_arr)
     return image, image_arr
 
-# Get indices of top 5 matching images
 def get_idx_of_matches(all_encodings, query_encoding, n_matches=5):
     
     encoding_diff = np.sum(np.abs(all_encodings - query_encoding), axis=1)
