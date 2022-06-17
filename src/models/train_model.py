@@ -44,30 +44,30 @@ def main(base_dir):
 
     logger = logging.getLogger(__name__)
 
-    # Load processed data
+    # -------------- Load processed data -----------------
     processed_data_dir = os.path.join(base_dir, 'data/processed')
     data_dict_path = os.path.join(processed_data_dir, 'data_dict')
     with open(data_dict_path, 'rb') as file_pi:
         data_dict = pickle.load(file_pi)
     logger.info('loaded train, valid and test data')
     
-    # Pre-process data
+    # -------------- Pre-process data -----------------
     from tensorflow.keras.applications.vgg16 import preprocess_input
 
     data_dict['X_train'] = preprocess_input(data_dict['X_train'])
     data_dict['X_valid'] = preprocess_input(data_dict['X_valid'])
     data_dict['X_test'] = preprocess_input(data_dict['X_test'])
 
-    # Build and compile model
+    # -------------- Build and compile model -----------------
     model = build_model(logger, data_dict)
 
-    # Train model
+    # -------------- Train model -----------------
     epochs = int(input("Enter no. of epochs:"))
     logger.info(f'training model for {epochs} epochs')
     history = model.fit(data_dict['X_train'], data_dict['y_train'],\
         epochs=epochs, validation_data=(data_dict['X_valid'], data_dict['y_valid']), batch_size=32)
 
-    # Save history 
+    # -------------- Save history -----------------
     model_path =  os.path.join(base_dir, 'models')
     if(os.path.exists(model_path) == False):
         os.makedirs(model_path)
@@ -77,7 +77,7 @@ def main(base_dir):
         pickle.dump(history.history, file_pi)
     logger.info('saved performance history')
 
-    # Save model
+    # -------------- Save model -----------------
     model.save(model_path)
     logger.info(f'saved model history to {model_path}')
 
