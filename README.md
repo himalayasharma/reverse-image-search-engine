@@ -8,7 +8,7 @@
   <h1 align="center">Small Image Search Engine</h1>
 </div>
 
-![GitHub Repo stars](https://img.shields.io/github/stars/himalayasharma/small-image-search-engine?style=social) ![GitHub forks](https://img.shields.io/github/forks/himalayasharma/small-image-search-engine?style=social) ![GitHub pull requests](https://img.shields.io/github/issues-pr/himalayasharma/small-image-search-engine)   ![GitHub  issues](https://img.shields.io/github/issues-raw/himalayasharma/small-image-search-engine)
+<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/himalayasharma/small-image-search-engine?style=social"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/himalayasharma/small-image-search-engine?style=social"> <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himalayasharma/small-image-search-engine"> <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/himalayasharma/small-image-search-engine">
 
 Gives top 5 matches (from the [CIFAR-10](http://www.cs.toronto.edu/~kriz/cifar.html) dataset) for given query image. 
 
