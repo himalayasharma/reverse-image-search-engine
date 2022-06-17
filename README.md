@@ -43,7 +43,7 @@ Prerequisites
 ------------
 Before you begin, ensure you have met the following requirements:
 * You have a `Linux/Mac/Windows` machine.
-* You have installed a `python` distribution. For NVIDIA GPU support, `conda` is preferred as `cudatoolkit` and `cudnn` packages are hosted on `conda-forge` channel.
+* You have installed a `python` distribution. For NVIDIA GPU support, `conda` is preferred as `cudatoolkit` and `cudnn` packages hosted on `conda-forge` channel can be installed easily.
 * You have installed `pip`.
 * You have installed `make`.
 
@@ -74,11 +74,19 @@ Setup
 	```make
 	make encodings
 	```
-8. Run model prediction.
-	```make
-	make predict
-	```
     
+Usage
+------------
+After the model is trained it can be used for inference. 
+
+1. Put a query image in `query-images` directory. 
+2. Run the following command:
+```make
+make predict
+```
+3. Enter name of the image (with extension).
+![alt text](https://github.com/himalayasharma/small-image-search-engine/blob/master/readme-assets/enter-query-image.png)
+![alt text](https://github.com/himalayasharma/small-image-search-engine/blob/master/readme-assets/output-dog.png)
 
 
 
