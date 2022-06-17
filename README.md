@@ -90,6 +90,8 @@ make predict
 
 Outputs
 ------------
+Query images used here are not from the CIFAR-10 dataset.
+
 Example 1:
 
 ![alt text](https://github.com/himalayasharma/small-image-search-engine/blob/master/readme-assets/output-dog.png)
