@@ -10,9 +10,9 @@
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/himalayasharma/small-image-search-engine?style=social) ![GitHub forks](https://img.shields.io/github/forks/himalayasharma/small-image-search-engine?style=social) ![GitHub pull requests](https://img.shields.io/github/issues-pr/himalayasharma/small-image-search-engine)   ![GitHub  issues](https://img.shields.io/github/issues-raw/himalayasharma/small-image-search-engine)
 
-Gives top 5 matches (from the CIFAR-10 dataset) for given query image. 
+Gives top 5 matches (from the [CIFAR-10](http://www.cs.toronto.edu/~kriz/cifar.html) dataset) for given query image. 
 
-A VGG-16 model is used to generate encodings of images in the CIFAR-10 dataset. Top 5 images with highest similarity to the query image are returned back.
+A [VGG-16](https://keras.io/api/applications/vgg/) model is used to generate encodings of images in the CIFAR-10 dataset. Top 5 images with highest similarity to the query image are returned back.
 
 Project Organization
 ------------
