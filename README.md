@@ -1,50 +1,10 @@
-small-image-search-engine
+Small Image Search Engine
 ==============================
 ![GitHub Repo stars](https://img.shields.io/github/stars/himalayasharma/small-image-search-engine?style=social) ![GitHub forks](https://img.shields.io/github/forks/himalayasharma/small-image-search-engine?style=social) ![GitHub pull requests](https://img.shields.io/github/issues-pr/himalayasharma/small-image-search-engine)   ![GitHub  issues](https://img.shields.io/github/issues-raw/himalayasharma/small-image-search-engine)  ![GitHub  all  releases](https://img.shields.io/github/downloads/himalayasharma/small-image-search-engine/total)
 
 Gives top 5 matches (from the CIFAR-10 dataset) for given query image. 
 
 A VGG-16 model is used to generate encodings of images in the CIFAR-10 dataset. Top 5 images with highest similarity to the query image are returned back.
-
-Prerequisites
-------------
-Before you begin, ensure you have met the following requirements:
-* You have a `Linux/Mac/Windows` machine.
-* You have installed a `python` distribution. For NVIDIA GPU support, `conda` is preferred as `cudatoolkit` and `cudnn` packages are hosted on `conda-forge` channel.
-* You have installed `pip`.
-* You have installed `make`.
-
-Setup
-------------
-1. Clone the repo
-	```
-	git clone https://github.com/himalayasharma/small-image-search-engine.git
-	```
-2. Create virtual environment.
-	```make
-	make create_environment
-	```
-3. Activate virtual environment.
-4. Download packages required.
-	```make
-	make requirements
-	```
-5. Download and process CIFAR-10 dataset.
-	```make
-	make data
-	```
-6. Train model on CIFAR-10 dataset.
-	```make
-	make train
-	```
-7. Generate encodings for all images in the dataset.
-	```make
-	make encodings
-	```
-8. Run model prediction.
-	```make
-	make predict
-	```
 
 Project Organization
 ------------
@@ -79,4 +39,46 @@ Project Organization
             └── visualize.py
     
 --------
+Prerequisites
+------------
+Before you begin, ensure you have met the following requirements:
+* You have a `Linux/Mac/Windows` machine.
+* You have installed a `python` distribution. For NVIDIA GPU support, `conda` is preferred as `cudatoolkit` and `cudnn` packages are hosted on `conda-forge` channel.
+* You have installed `pip`.
+* You have installed `make`.
+
+Setup
+------------
+1. Clone the repo
+	```
+	git clone https://github.com/himalayasharma/small-image-search-engine.git
+	```
+2. Create virtual environment.
+	```make
+	make create_environment
+	```
+3. Activate virtual environment.
+4. Download and install all required packages.
+	```make
+	make requirements
+	```
+5. Download and process CIFAR-10 dataset.
+	```make
+	make data
+	```
+6. Train model on CIFAR-10 dataset.
+	```make
+	make train
+	```
+7. Generate encodings for all images in the dataset.
+	```make
+	make encodings
+	```
+8. Run model prediction.
+	```make
+	make predict
+	```
+    
+
+
 
