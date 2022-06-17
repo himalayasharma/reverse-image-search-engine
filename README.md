@@ -8,7 +8,7 @@
   <h1 align="center">Small Image Search Engine</h1>
 </div>
 
-![GitHub Repo stars](https://img.shields.io/github/stars/himalayasharma/small-image-search-engine?style=social) ![GitHub forks](https://img.shields.io/github/forks/himalayasharma/small-image-search-engine?style=social) ![GitHub pull requests](https://img.shields.io/github/issues-pr/himalayasharma/small-image-search-engine)   ![GitHub  issues](https://img.shields.io/github/issues-raw/himalayasharma/small-image-search-engine)  ![GitHub  all  releases](https://img.shields.io/github/downloads/himalayasharma/small-image-search-engine/total)
+![GitHub Repo stars](https://img.shields.io/github/stars/himalayasharma/small-image-search-engine?style=social) ![GitHub forks](https://img.shields.io/github/forks/himalayasharma/small-image-search-engine?style=social) ![GitHub pull requests](https://img.shields.io/github/issues-pr/himalayasharma/small-image-search-engine)   ![GitHub  issues](https://img.shields.io/github/issues-raw/himalayasharma/small-image-search-engine)
 
 Gives top 5 matches (from the CIFAR-10 dataset) for given query image. 
 
@@ -48,7 +48,6 @@ Project Organization
         └── visualization  <- Scripts to create exploratory and results oriented visualizations
             └── visualize.py
     
---------
 Prerequisites
 ------------
 Before you begin, ensure you have met the following requirements:
@@ -136,3 +135,4 @@ Ackowledgements
 * [drivendata](https://github.com/drivendata)
 * [James.Scott](https://github.com/scottydocs)
 * [Othneil Drew](https://github.com/othneildrew)
+--------
