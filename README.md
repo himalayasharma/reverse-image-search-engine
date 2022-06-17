@@ -84,9 +84,22 @@ After the model is trained it can be used for inference.
 ```make
 make predict
 ```
-3. Enter name of the image (with extension).
+3. Enter name of the image (with extension) and press enter.
+
 ![alt text](https://github.com/himalayasharma/small-image-search-engine/blob/master/readme-assets/enter-query-image.png)
+
+Outputs
+------------
+Example 1:
+
 ![alt text](https://github.com/himalayasharma/small-image-search-engine/blob/master/readme-assets/output-dog.png)
 
+Example 2:
+
+![alt text](https://github.com/himalayasharma/small-image-search-engine/blob/master/readme-assets/output-frog.png)
+
+Example 3:
+
+![alt text](https://github.com/himalayasharma/small-image-search-engine/blob/master/readme-assets/output-horse.png)
 
 
