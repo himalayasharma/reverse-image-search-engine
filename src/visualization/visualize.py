@@ -30,9 +30,7 @@ def save_sample_images(X, y, y_str, img_save_path):
     plt.savefig(os.path.join(img_save_path, 'cifar-10-samples.png'), bbox_inches='tight')
 
 def main(base_dir):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
+
     logger = logging.getLogger(__name__)
 
     # -------------- Load X, y and corresponding string encoded labels -----------------
