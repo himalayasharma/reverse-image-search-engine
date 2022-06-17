@@ -1,5 +1,13 @@
-Small Image Search Engine
-==============================
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a>
+    <img src="readme-assets/cifar-10-sample.png" alt="Logo" width="240" height="240">
+  </a>
+
+  <h1 align="center">Small Image Search Engine</h1>
+</div>
+
 ![GitHub Repo stars](https://img.shields.io/github/stars/himalayasharma/small-image-search-engine?style=social) ![GitHub forks](https://img.shields.io/github/forks/himalayasharma/small-image-search-engine?style=social) ![GitHub pull requests](https://img.shields.io/github/issues-pr/himalayasharma/small-image-search-engine)   ![GitHub  issues](https://img.shields.io/github/issues-raw/himalayasharma/small-image-search-engine)  ![GitHub  all  releases](https://img.shields.io/github/downloads/himalayasharma/small-image-search-engine/total)
 
 Gives top 5 matches (from the CIFAR-10 dataset) for given query image. 
