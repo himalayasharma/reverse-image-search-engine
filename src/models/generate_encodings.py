@@ -6,7 +6,6 @@ from pathlib import Path
 from tensorflow import keras
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-# Build intermediate layer model
 def build_intermediate_layer_model(logger, model):
 
     from keras.models import Model
@@ -15,7 +14,6 @@ def build_intermediate_layer_model(logger, model):
     logger.info("constructed intermediate layer model")
     return intermediate_layer_model
 
-# Generate encodings for all images in dataset
 def generate_encodings(logger, model, data_dict):
 
     logger.info(f"started generating encodings")
@@ -24,7 +22,6 @@ def generate_encodings(logger, model, data_dict):
     logger.info(f"generated encodings for all {len(all_X)} images in CIFAR-10 dataset")
     return all_encodings
 
-# Unpickle file
 def unpickle(file):
 
     with open(file, 'rb') as fo:
@@ -44,25 +41,25 @@ def main(base_dir):
 
     logger = logging.getLogger(__name__)
 
-    # Load data
+    # -------------- Load data -----------------
     processed_data_dir = os.path.join(base_dir, 'data/processed')
     data_dict_path = os.path.join(processed_data_dir, 'data_dict')
     with open(data_dict_path, 'rb') as file_pi:
         data_dict = pickle.load(file_pi)
     logger.info('loaded train, valid and test data')
 
-    # Load trained model
+    # -------------- Load trained model -----------------
     model_path = os.path.join(base_dir, 'models')
     model = keras.models.load_model(model_path) 
     logger.info(f'loaded model from {model_path}')
 
-    # Build model with intermediate layer
+    # -------------- Build intermediate layer model -----------------
     intermediate_layer_model = build_intermediate_layer_model(logger, model)
 
-    # Generate encodings
+    # -------------- Generate encodings for all images -----------------
     all_encodings = generate_encodings(logger, intermediate_layer_model, data_dict)
 
-    # Save encodings
+    # -------------- Save encodings for all images -----------------
     encodings_path = os.path.join(model_path, 'encodings')
     with open(encodings_path, 'wb') as file_pi:
         pickle.dump(all_encodings, file_pi)
