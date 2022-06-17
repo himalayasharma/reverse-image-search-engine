@@ -117,3 +117,10 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 License
 ------------
 Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+Ackowledgements
+------------
+* [Aleksa Gordić](https://github.com/gordicaleksa)
+* [drivendata](https://github.com/drivendata)
+* [James.Scott](https://github.com/scottydocs)
+* [Othneil Drew](https://github.com/othneildrew)
