@@ -113,3 +113,7 @@ Contributions are what make the open source community such an amazing place to l
 5. Create the pull request.
 
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+License
+------------
+Distributed under the MIT License. See `LICENSE.txt` for more information.
