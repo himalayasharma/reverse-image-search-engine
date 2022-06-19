@@ -17,7 +17,7 @@ def build_model(logger, data_dict):
     logger.info('loaded pre-trained frozen VGG-16 model with imagenet weights')
 
     # Add dense layers at the end of pre-trained model
-    base_model.trainable = True
+    base_model.trainable = False
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.layers import Flatten, Dense
 
