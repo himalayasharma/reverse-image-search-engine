@@ -30,7 +30,7 @@ def build_model(logger, data_dict):
         Dense(units=10)
     ])
 
-    logger.info('added 3 dense layers to make the network compatible for current use-case')
+    logger.info('added 4 dense layers to make the network compatible for current use-case')
     print(model.summary())
 
     # Compile model
