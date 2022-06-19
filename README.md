@@ -5,7 +5,7 @@
     <img src="readme-assets/cifar-10-sample.png" alt="Logo" width="240" height="240">
   </a>
 
-  <h1 align="center">Small Image Search Engine</h1>
+  <h1 align="center">Reverse Image Search Engine</h1>
 </div>
 
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/himalayasharma/small-image-search-engine?style=social"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/himalayasharma/small-image-search-engine?style=social"> <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himalayasharma/small-image-search-engine"> <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/himalayasharma/small-image-search-engine">
